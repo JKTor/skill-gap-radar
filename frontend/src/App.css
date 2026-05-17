@@ -309,6 +309,62 @@
 .node-4 { left: 92px; bottom: 28px; }
 .node-5 { top: 118px; left: 38px; }
 
+/* ── Radar animations ─────────────────────────────────────────────────── */
+
+@keyframes ring-spin {
+  0%   { transform: translate(-50%, -50%) rotate(0deg) scale(0.6); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 1; }
+}
+
+@keyframes node-appear {
+  0%   { opacity: 0; transform: scale(0.5) translateY(8px); }
+  60%  { opacity: 1; transform: scale(1.06) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes sweep {
+  0%   { transform: translate(-50%, -50%) rotate(-90deg); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) rotate(270deg); opacity: 0; }
+}
+
+.radar-ring {
+  animation: ring-spin 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ring-large { animation-delay: 0ms;   }
+.ring-mid   { animation-delay: 60ms;  }
+.ring-small { animation-delay: 120ms; }
+
+.radar-node {
+  animation: node-appear 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  /* animationDelay set inline per node */
+}
+
+/* sweep line — หมุน 1 รอบแล้วหาย */
+.radar-sweep {
+  position: absolute;
+  inset: 50%;
+  width: 150px;
+  height: 2px;
+  border-radius: 2px;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  animation: sweep 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
+  pointer-events: none;
+}
+
+/* node-1 ไม่มี translate เพิ่มเติม ต้อง override transform ของ animation */
+.node-1 {
+  animation-name: node-appear-center;
+}
+
+@keyframes node-appear-center {
+  0%   { opacity: 0; transform: translateX(-50%) scale(0.5) translateY(8px); }
+  60%  { opacity: 1; transform: translateX(-50%) scale(1.06) translateY(-2px); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+}
+
 /* ── Insight panel ────────────────────────────────────────────────────── */
 
 .insight-panel { display: grid; gap: 12px; }

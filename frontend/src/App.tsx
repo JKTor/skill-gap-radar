@@ -92,6 +92,9 @@ function App() {
   const gaps = analysis?.gaps ?? []
   const courses = analysis?.recommended_courses ?? []
 
+  // เปลี่ยน key ทุกครั้งที่ role หรือ skills เปลี่ยน → radar animation restart
+  const radarKey = `${selectedRole}::${selectedSkills.join(',')}`
+
   const readiness = useMemo(() => {
     if (!gaps.length) return null
     const score = gaps.reduce((acc, g) => acc + Math.min(g.current_level / g.required_level, 1), 0)
@@ -266,12 +269,15 @@ function App() {
                     </div>
                     <Sparkles size={20} aria-hidden="true" />
                   </div>
-                  <div className="radar-visual">
+                  <div className="radar-visual" key={radarKey}>
                     {gaps.slice(0, 5).map((gap, i) => (
                       <div
                         key={gap.skill_id}
                         className={`radar-node node-${i + 1}`}
-                        style={{ ['--score' as string]: `${Math.round(gap.current_level * 100)}%` }}
+                        style={{
+                          ['--score' as string]: `${Math.round(gap.current_level * 100)}%`,
+                          animationDelay: `${i * 80}ms`,
+                        }}
                       >
                         <span>{gap.skill_name}</span>
                         <strong>{Math.round(gap.current_level * 100)}</strong>
@@ -280,6 +286,7 @@ function App() {
                     <div className="radar-ring ring-large" />
                     <div className="radar-ring ring-mid" />
                     <div className="radar-ring ring-small" />
+                    <div className="radar-sweep" />
                   </div>
                 </section>
 
