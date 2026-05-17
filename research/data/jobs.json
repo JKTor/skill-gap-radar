@@ -1,0 +1,274 @@
+[
+    {
+        "title": "Cloud Architect (AWS/Azure)",
+        "company": "True Digital Group",
+        "industry": "technology",
+        "salary_min": 120000,
+        "salary_max": 200000,
+        "source": "market_research",
+        "skills": [
+            ["Cloud Computing", 1.0],
+            ["AWS", 0.9],
+            ["Azure", 0.8],
+            ["Docker", 0.7],
+            ["Kubernetes", 0.9],
+            ["Terraform", 0.8]
+        ]
+    },
+    {
+        "title": "Cybersecurity Analyst",
+        "company": "G-Able",
+        "industry": "technology",
+        "salary_min": 50000,
+        "salary_max": 90000,
+        "source": "market_research",
+        "skills": [
+            ["Network Security", 1.0],
+            ["Penetration Testing", 0.9],
+            ["SIEM", 0.8],
+            ["Python", 0.6],
+            ["Risk Management", 0.7]
+        ]
+    },
+    {
+        "title": "Senior Frontend Developer (React)",
+        "company": "Agoda",
+        "industry": "travel",
+        "salary_min": 90000,
+        "salary_max": 160000,
+        "source": "market_research",
+        "skills": [
+            ["React", 1.0],
+            ["TypeScript", 0.9],
+            ["Next.js", 0.8],
+            ["CSS", 0.7],
+            ["API Development", 0.6]
+        ]
+    },
+    {
+        "title": "AI/ML Engineer",
+        "company": "AIS",
+        "industry": "telecom",
+        "salary_min": 80000,
+        "salary_max": 150000,
+        "source": "market_research",
+        "skills": [
+            ["Machine Learning", 1.0],
+            ["Deep Learning", 0.9],
+            ["Python", 1.0],
+            ["TensorFlow", 0.8],
+            ["SQL", 0.7]
+        ]
+    },
+    {
+        "title": "Data Engineer",
+        "company": "Shopee",
+        "industry": "ecommerce",
+        "salary_min": 70000,
+        "salary_max": 140000,
+        "source": "market_research",
+        "skills": [
+            ["Apache Spark", 0.9],
+            ["Kafka", 0.8],
+            ["Airflow", 0.8],
+            ["Python", 1.0],
+            ["SQL", 1.0]
+        ]
+    },
+    {
+        "title": "Data Engineer",
+        "company": "Lazada",
+        "industry": "ecommerce",
+        "salary_min": 65000,
+        "salary_max": 130000,
+        "source": "market_research",
+        "skills": [
+            ["BigQuery", 0.9],
+            ["dbt", 0.8],
+            ["SQL", 1.0],
+            ["Python", 0.9],
+            ["Airflow", 0.7]
+        ]
+    },
+    {
+        "title": "Senior Data Engineer",
+        "company": "SCB TechX",
+        "industry": "fintech",
+        "salary_min": 90000,
+        "salary_max": 180000,
+        "source": "market_research",
+        "skills": [
+            ["Apache Spark", 1.0],
+            ["Kafka", 0.9],
+            ["SQL", 1.0],
+            ["Python", 0.9],
+            ["Airflow", 0.8],
+            ["BigQuery", 0.7]
+        ]
+    },
+    {
+        "title": "DevOps Engineer",
+        "company": "Agoda",
+        "industry": "travel",
+        "salary_min": 80000,
+        "salary_max": 160000,
+        "source": "market_research",
+        "skills": [
+            ["Docker", 1.0],
+            ["Kubernetes", 1.0],
+            ["CI/CD", 0.9],
+            ["AWS", 0.9],
+            ["Linux", 0.8]
+        ]
+    },
+    {
+        "title": "Platform Engineer",
+        "company": "Ascend",
+        "industry": "fintech",
+        "salary_min": 70000,
+        "salary_max": 140000,
+        "source": "market_research",
+        "skills": [
+            ["Kubernetes", 1.0],
+            ["Terraform", 0.9],
+            ["AWS", 0.9],
+            ["Prometheus", 0.8],
+            ["CI/CD", 0.8]
+        ]
+    },
+    {
+        "title": "Backend Engineer (Go)",
+        "company": "Bitkub",
+        "industry": "fintech",
+        "salary_min": 80000,
+        "salary_max": 150000,
+        "source": "market_research",
+        "skills": [
+            ["Go", 1.0],
+            ["PostgreSQL", 0.9],
+            ["Redis", 0.8],
+            ["Microservices", 0.9],
+            ["REST API", 1.0]
+        ]
+    },
+    {
+        "title": "Senior Backend Developer",
+        "company": "LINE MAN Wongnai",
+        "industry": "technology",
+        "salary_min": 100000,
+        "salary_max": 180000,
+        "source": "market_research",
+        "skills": [
+            ["Go", 0.9],
+            ["Java", 0.8],
+            ["Microservices", 1.0],
+            ["Redis", 0.8],
+            ["PostgreSQL", 0.9]
+        ]
+    },
+    {
+        "title": "MLOps Engineer",
+        "company": "KBTG",
+        "industry": "fintech",
+        "salary_min": 90000,
+        "salary_max": 170000,
+        "source": "market_research",
+        "skills": [
+            ["MLflow", 0.9],
+            ["Kubeflow", 0.8],
+            ["Docker", 0.9],
+            ["Python", 1.0],
+            ["Model Monitoring", 0.8]
+        ]
+    },
+    {
+        "title": "AI Specialist (LLM)",
+        "company": "SCB 10X",
+        "industry": "fintech",
+        "salary_min": 100000,
+        "salary_max": 250000,
+        "source": "market_research",
+        "skills": [
+            ["Prompt Engineering", 1.0],
+            ["LangChain", 0.9],
+            ["OpenAI API", 0.9],
+            ["RAG", 1.0],
+            ["Vector DB", 0.9],
+            ["Python", 1.0]
+        ]
+    },
+    {
+        "title": "Mobile Developer (iOS/Android)",
+        "company": "Garena",
+        "industry": "gaming",
+        "salary_min": 60000,
+        "salary_max": 130000,
+        "source": "market_research",
+        "skills": [
+            ["Swift", 0.9],
+            ["Kotlin", 0.9],
+            ["REST API", 0.8],
+            ["Firebase", 0.8],
+            ["App Store Deployment", 0.7]
+        ]
+    },
+    {
+        "title": "UX Designer",
+        "company": "Ookbee",
+        "industry": "media",
+        "salary_min": 45000,
+        "salary_max": 85000,
+        "source": "market_research",
+        "skills": [
+            ["Figma", 1.0],
+            ["User Research", 0.9],
+            ["Prototyping", 0.9],
+            ["Design Systems", 0.8]
+        ]
+    },
+    {
+        "title": "Solutions Architect",
+        "company": "Central Tech",
+        "industry": "retail",
+        "salary_min": 120000,
+        "salary_max": 220000,
+        "source": "market_research",
+        "skills": [
+            ["System Design", 1.0],
+            ["AWS", 0.9],
+            ["Microservices", 0.9],
+            ["Kafka", 0.8],
+            ["Payment Gateway", 0.8]
+        ]
+    },
+    {
+        "title": "Healthcare IT Engineer",
+        "company": "Bumrungrad",
+        "industry": "healthcare",
+        "salary_min": 60000,
+        "salary_max": 110000,
+        "source": "market_research",
+        "skills": [
+            ["HL7/FHIR", 1.0],
+            ["Python", 0.8],
+            ["PostgreSQL", 0.8],
+            ["Data Privacy", 0.9],
+            ["REST API", 0.7]
+        ]
+    },
+    {
+        "title": "Full-stack Developer",
+        "company": "Wongnai",
+        "industry": "technology",
+        "salary_min": 70000,
+        "salary_max": 140000,
+        "source": "market_research",
+        "skills": [
+            ["React", 1.0],
+            ["Node.js", 0.9],
+            ["TypeScript", 0.9],
+            ["PostgreSQL", 0.8],
+            ["Docker", 0.7]
+        ]
+    }
+]

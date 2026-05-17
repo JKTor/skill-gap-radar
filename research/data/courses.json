@@ -1,0 +1,161 @@
+[
+    {
+        "title": "AWS Certified Solutions Architect",
+        "provider": "A Cloud Guru",
+        "url": "https://acloudguru.com",
+        "description": "Master AWS architecture and prepare for certification.",
+        "duration_hours": 40.0,
+        "price_usd": 35.0,
+        "rating": 4.8,
+        "skills": [
+            ["Cloud Computing", 1.0],
+            ["AWS", 1.0],
+            ["Terraform", 0.5]
+        ]
+    },
+    {
+        "title": "Complete React Developer 2026",
+        "provider": "ZTM",
+        "url": "https://zerotomastery.io",
+        "description": "Learn React, Redux, Hooks, GraphQL, and more.",
+        "duration_hours": 60.0,
+        "price_usd": 29.0,
+        "rating": 4.9,
+        "skills": [
+            ["React", 1.0],
+            ["TypeScript", 0.8],
+            ["Next.js", 0.7],
+            ["CSS", 0.6]
+        ]
+    },
+    {
+        "title": "Google Cybersecurity Professional Certificate",
+        "provider": "Coursera",
+        "url": "https://coursera.org",
+        "description": "Entry-level cybersecurity training for a career in tech.",
+        "duration_hours": 150.0,
+        "price_usd": 49.0,
+        "rating": 4.7,
+        "skills": [
+            ["Network Security", 0.9],
+            ["SIEM", 0.7],
+            ["Python", 0.5],
+            ["Risk Management", 0.8]
+        ]
+    },
+    {
+        "title": "Docker and Kubernetes: The Complete Guide",
+        "provider": "Udemy",
+        "url": "https://udemy.com",
+        "description": "Learn Docker and Kubernetes from scratch.",
+        "duration_hours": 22.0,
+        "price_usd": 12.0,
+        "rating": 4.8,
+        "skills": [
+            ["Docker", 1.0],
+            ["Kubernetes", 1.0],
+            ["Cloud Computing", 0.4]
+        ]
+    },
+    {
+        "title": "Data Engineering with Google Cloud",
+        "provider": "Coursera",
+        "url": "https://www.coursera.org/specializations/gcp-data-engineering",
+        "description": "Learn to design, build, and operationalize data processing systems.",
+        "duration_hours": 80.0,
+        "price_usd": 49.0,
+        "rating": 4.8,
+        "skills": [
+            ["BigQuery", 1.0],
+            ["Apache Spark", 0.7],
+            ["SQL", 0.9],
+            ["Python", 0.8]
+        ]
+    },
+    {
+        "title": "The Ultimate Hands-On Hadoop",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/the-ultimate-hands-on-hadoop-tame-your-big-data/",
+        "description": "Hadoop, Spark, Pig, Hive, and more.",
+        "duration_hours": 14.5,
+        "price_usd": 15.0,
+        "rating": 4.6,
+        "skills": [
+            ["Apache Spark", 0.9],
+            ["Kafka", 0.7],
+            ["SQL", 0.6]
+        ]
+    },
+    {
+        "title": "Go: The Complete Developer's Guide",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/go-the-complete-developers-guide/",
+        "description": "Master the fundamentals and advanced features of Go.",
+        "duration_hours": 9.0,
+        "price_usd": 12.0,
+        "rating": 4.7,
+        "skills": [
+            ["Go", 1.0],
+            ["REST API", 0.8],
+            ["Microservices", 0.6]
+        ]
+    },
+    {
+        "title": "Mastering LangChain and OpenAI",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/mastering-langchain/",
+        "description": "Build LLM applications with LangChain and Python.",
+        "duration_hours": 12.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["LangChain", 1.0],
+            ["Prompt Engineering", 0.9],
+            ["OpenAI API", 0.9],
+            ["Python", 0.8],
+            ["RAG", 0.7]
+        ]
+    },
+    {
+        "title": "iOS & Swift - The Complete iOS App Development Bootcamp",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
+        "description": "Learn iOS development with Swift.",
+        "duration_hours": 55.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["Swift", 1.0],
+            ["REST API", 0.7],
+            ["Firebase", 0.8]
+        ]
+    },
+    {
+        "title": "Figma UI/UX Design Essentials",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/figma-ux-ui-design-essentials/",
+        "description": "Learn UI/UX design from scratch using Figma.",
+        "duration_hours": 11.0,
+        "price_usd": 15.0,
+        "rating": 4.7,
+        "skills": [
+            ["Figma", 1.0],
+            ["User Research", 0.8],
+            ["Prototyping", 0.9],
+            ["Design Systems", 0.8]
+        ]
+    },
+    {
+        "title": "Healthcare Data Standards and Interoperability",
+        "provider": "Coursera",
+        "url": "https://www.coursera.org/learn/healthcare-data-standards",
+        "description": "Introduction to HL7, FHIR, and healthcare data standards.",
+        "duration_hours": 15.0,
+        "price_usd": 49.0,
+        "rating": 4.5,
+        "skills": [
+            ["HL7/FHIR", 1.0],
+            ["Data Privacy", 0.8]
+        ]
+    }
+]
