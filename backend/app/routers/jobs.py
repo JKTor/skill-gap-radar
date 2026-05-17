@@ -12,8 +12,14 @@ router = APIRouter(prefix="/jobs", tags=["jobs"])
 @router.get("/titles")
 def list_job_titles(db: Session = Depends(get_db)):
     """Distinct job titles for frontend role picker."""
-    rows = db.query(Job.title, Job.industry).distinct(Job.title).order_by(Job.title).all()
-    return [{"title": r.title, "industry": r.industry} for r in rows]
+    seen: set[str] = set()
+    rows = db.query(Job.title, Job.industry).order_by(Job.title).all()
+    result = []
+    for r in rows:
+        if r.title not in seen:
+            seen.add(r.title)
+            result.append({"title": r.title, "industry": r.industry})
+    return result
 
 
 @router.get("/", response_model=list[JobRead])
