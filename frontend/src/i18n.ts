@@ -39,10 +39,13 @@ export const t = {
 
     // Radar page — sidebar
     targetRole: 'Target role',
+    allIndustries: 'ทั้งหมด',
     searchPlaceholder: 'ค้นหาตำแหน่งงาน…',
     loadingRoles: 'กำลังโหลด…',
     yourSkills: 'Your skills',
     selectedCount: (n: number) => `เลือกแล้ว ${n} ทักษะ`,
+    filterSkills: 'กรองทักษะ...',
+    noSkillsFound: 'ไม่พบทักษะ',
 
     // Radar page — header
     targetScan: 'Target scan',
@@ -112,10 +115,13 @@ export const t = {
 
     // Radar page — sidebar
     targetRole: 'Target role',
+    allIndustries: 'All',
     searchPlaceholder: 'Search role…',
     loadingRoles: 'Loading…',
     yourSkills: 'Your skills',
     selectedCount: (n: number) => `${n} selected`,
+    filterSkills: 'Filter skills...',
+    noSkillsFound: 'No skills found',
 
     // Radar page — header
     targetScan: 'Target scan',

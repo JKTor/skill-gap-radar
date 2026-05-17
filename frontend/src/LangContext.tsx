@@ -3,7 +3,7 @@ import { t, type Lang } from './i18n'
 
 type LangCtx = {
   lang: Lang
-  T: typeof t['th']
+  T: (typeof t)[Lang]
   toggle: () => void
 }
 
@@ -23,4 +23,5 @@ export function LangProvider({ children }: { children: ReactNode }) {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLang = () => useContext(LangContext)

@@ -50,6 +50,8 @@ function App() {
   const [query, setQuery] = useState('')
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [isRoleMenuOpen, setIsRoleMenuOpen] = useState(false)
+  const [selectedIndustry, setSelectedIndustry] = useState<string>('all')
+  const [skillQuery, setSkillQuery] = useState('')
 
   // ─── Bootstrap ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -85,12 +87,27 @@ function App() {
 
   // ─── Derived ──────────────────────────────────────────────────────────────
   const filteredTitles = useMemo(
-    () => jobTitles.filter((j) => j.title.toLowerCase().includes(query.toLowerCase())),
-    [jobTitles, query],
+    () =>
+      jobTitles.filter((j) => {
+        const matchesIndustry = selectedIndustry === 'all' || j.industry === selectedIndustry
+        const matchesQuery = j.title.toLowerCase().includes(query.toLowerCase())
+        return matchesIndustry && matchesQuery
+      }),
+    [jobTitles, query, selectedIndustry],
   )
 
-  const gaps = analysis?.gaps ?? []
-  const courses = analysis?.recommended_courses ?? []
+  const industries = useMemo(
+    () => Array.from(new Set(jobTitles.map((j) => j.industry))).filter(Boolean),
+    [jobTitles],
+  )
+
+  const filteredSkills = useMemo(
+    () => allSkills.filter((skill) => skill.name.toLowerCase().includes(skillQuery.toLowerCase())),
+    [allSkills, skillQuery],
+  )
+
+  const gaps = useMemo(() => analysis?.gaps ?? [], [analysis])
+  const courses = useMemo(() => analysis?.recommended_courses ?? [], [analysis])
 
   // เปลี่ยน key ทุกครั้งที่ role หรือ skills เปลี่ยน → radar animation restart
   const radarKey = `${selectedRole}::${selectedSkills.join(',')}`
@@ -164,6 +181,37 @@ function App() {
 
             {/* Role picker */}
             <section className="control-section">
+              {apiMode === 'checking' ? (
+                <div className="skeleton-block" aria-label="Loading role controls">
+                  <span className="skeleton-line short" />
+                  <span className="skeleton-line input" />
+                  <div className="skeleton-chip-row">
+                    {Array.from({ length: 6 }).map((_, index) => (
+                      <span key={index} className="skeleton-chip" />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <>
+              <div className="industry-filter" aria-label="Industry filter">
+                <button
+                  type="button"
+                  className={selectedIndustry === 'all' ? 'active' : ''}
+                  onClick={() => setSelectedIndustry('all')}
+                >
+                  {T.allIndustries}
+                </button>
+                {industries.map((industry) => (
+                  <button
+                    key={industry}
+                    type="button"
+                    className={selectedIndustry === industry ? 'active' : ''}
+                    onClick={() => setSelectedIndustry(industry)}
+                  >
+                    {industry}
+                  </button>
+                ))}
+              </div>
               <label htmlFor="role-search">{T.targetRole}</label>
               <div className="autocomplete">
                 <Search size={18} aria-hidden="true" />
@@ -173,7 +221,6 @@ function App() {
                   onChange={(e) => { setQuery(e.target.value); setIsRoleMenuOpen(true) }}
                   onFocus={() => setIsRoleMenuOpen(true)}
                   placeholder={apiMode === 'connected' ? T.searchPlaceholder : T.loadingRoles}
-                  disabled={apiMode === 'checking'}
                 />
                 <button
                   type="button"
@@ -195,6 +242,8 @@ function App() {
                   ))}
                 </div>
               )}
+                </>
+              )}
             </section>
 
             {/* Skill picker */}
@@ -203,8 +252,28 @@ function App() {
                 <label>{T.yourSkills}</label>
                 <span>{T.selectedCount(selectedSkills.length)}</span>
               </div>
+              {apiMode === 'checking' ? (
+                <div className="skeleton-block" aria-label="Loading skills">
+                  <span className="skeleton-line input" />
+                  <div className="skeleton-chip-row">
+                    {Array.from({ length: 6 }).map((_, index) => (
+                      <span key={index} className="skeleton-chip" />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <>
+              <div className="skill-filter">
+                <Search size={15} aria-hidden="true" />
+                <input
+                  value={skillQuery}
+                  onChange={(e) => setSkillQuery(e.target.value)}
+                  placeholder={T.filterSkills}
+                  aria-label={T.filterSkills}
+                />
+              </div>
               <div className="skill-picker">
-                {allSkills.map((skill) => {
+                {filteredSkills.map((skill) => {
                   const selected = selectedSkills.includes(skill.name)
                   return (
                     <button
@@ -219,11 +288,25 @@ function App() {
                   )
                 })}
               </div>
+              {filteredSkills.length === 0 && (
+                <p className="empty-skills">{T.noSkillsFound}</p>
+              )}
+                </>
+              )}
             </section>
           </aside>
 
           {/* ── Workspace ─────────────────────────────────────────────── */}
           <section className="workspace">
+            {apiMode === 'checking' ? (
+              <header className="workspace-header skeleton-workspace" aria-label="Loading analysis">
+                <div>
+                  <span className="skeleton-line short" />
+                  <span className="skeleton-line title" />
+                  <span className="skeleton-line wide" />
+                </div>
+              </header>
+            ) : (
             <header className="workspace-header">
               <div>
                 <p className="eyebrow">{T.targetScan}</p>
@@ -238,9 +321,7 @@ function App() {
                 <div className={`api-status ${apiMode}`}>
                   <span>{T.backendLabel}</span>
                   <strong>
-                    {apiMode === 'connected' ? apiHealth?.status
-                      : apiMode === 'checking' ? T.checking
-                      : T.mockMode}
+                    {apiMode === 'connected' ? apiHealth?.status : T.mockMode}
                   </strong>
                 </div>
                 {readiness !== null && (
@@ -257,6 +338,7 @@ function App() {
                 )}
               </div>
             </header>
+            )}
 
             {/* Radar + insight */}
             {gaps.length > 0 && (

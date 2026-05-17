@@ -98,6 +98,33 @@
   background: transparent;
 }
 
+.industry-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.industry-filter button {
+  min-height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: var(--text);
+  background: var(--bg-input);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.industry-filter button.active,
+.industry-filter button:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+  background: var(--accent-light);
+}
+
 .icon-button,
 .plan-item button {
   display: grid;
@@ -150,6 +177,35 @@
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
+}
+
+.skill-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-input);
+  padding: 0 10px;
+}
+
+.skill-filter input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--text-strong);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+}
+
+.empty-skills {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 13px;
 }
 
 .skill-picker button {
@@ -227,6 +283,64 @@
 
 [data-theme="dark"] .api-status.connected strong { color: #5dbd8a; }
 [data-theme="dark"] .api-status.mock strong      { color: #c9a44a; }
+
+/* ── Loading skeleton ─────────────────────────────────────────────────── */
+
+@keyframes skeleton-pulse {
+  0% { opacity: 0.55; }
+  50% { opacity: 1; }
+  100% { opacity: 0.55; }
+}
+
+.skeleton-block {
+  display: grid;
+  gap: 12px;
+}
+
+.skeleton-line,
+.skeleton-chip {
+  display: block;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--border), var(--bg-metric), var(--border));
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-line.short {
+  width: 112px;
+  height: 14px;
+}
+
+.skeleton-line.input {
+  width: 100%;
+  height: 46px;
+}
+
+.skeleton-line.title {
+  width: min(420px, 70vw);
+  height: 36px;
+  margin-top: 10px;
+}
+
+.skeleton-line.wide {
+  width: min(620px, 82vw);
+  height: 16px;
+  margin-top: 12px;
+}
+
+.skeleton-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.skeleton-chip {
+  width: 84px;
+  height: 36px;
+}
+
+.skeleton-workspace {
+  min-height: 144px;
+}
 
 /* ── Dashboard grid ───────────────────────────────────────────────────── */
 
