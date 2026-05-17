@@ -157,5 +157,129 @@
             ["HL7/FHIR", 1.0],
             ["Data Privacy", 0.8]
         ]
+    },
+    {
+        "title": "PyTorch for Deep Learning",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/pytorch-for-deep-learning/",
+        "description": "Master deep learning with PyTorch and Python.",
+        "duration_hours": 25.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["PyTorch", 1.0],
+            ["Deep Learning", 0.9],
+            ["Machine Learning", 0.7]
+        ]
+    },
+    {
+        "title": "Power BI Desktop",
+        "provider": "Coursera",
+        "url": "https://www.coursera.org/learn/power-bi-desktop",
+        "description": "Master data visualization with Power BI.",
+        "duration_hours": 20.0,
+        "price_usd": 49.0,
+        "rating": 4.7,
+        "skills": [
+            ["Power BI", 1.0],
+            ["Data Analysis", 0.9]
+        ]
+    },
+    {
+        "title": "Snowflake + dbt Modern Data Stack",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/snowflake-dbt-modern-data-stack/",
+        "description": "Build modern data pipelines with Snowflake and dbt.",
+        "duration_hours": 18.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["Snowflake", 1.0],
+            ["dbt", 0.9],
+            ["Data Analysis", 0.7]
+        ]
+    },
+    {
+        "title": "Flutter & Dart Complete Guide",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/flutter-dart-the-complete-guide/",
+        "description": "Comprehensive guide to mobile development with Flutter.",
+        "duration_hours": 42.0,
+        "price_usd": 15.0,
+        "rating": 4.9,
+        "skills": [
+            ["Flutter", 1.0],
+            ["Dart", 1.0],
+            ["Firebase", 0.8]
+        ]
+    },
+    {
+        "title": "Vue.js 3 Complete Guide",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/vuejs-2-the-complete-guide/",
+        "description": "Master Vue.js including Vue 3 and the Composition API.",
+        "duration_hours": 31.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["Vue.js", 1.0],
+            ["TypeScript", 0.8],
+            ["GraphQL", 0.7]
+        ]
+    },
+    {
+        "title": "Elasticsearch Complete Guide",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/elasticsearch-complete-guide/",
+        "description": "Master the full features of Elasticsearch.",
+        "duration_hours": 12.0,
+        "price_usd": 15.0,
+        "rating": 4.7,
+        "skills": [
+            ["Elasticsearch", 1.0],
+            ["REST API", 0.8]
+        ]
+    },
+    {
+        "title": "GitOps with ArgoCD",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/gitops-with-argocd/",
+        "description": "Master GitOps principles and ArgoCD implementation.",
+        "duration_hours": 10.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["ArgoCD", 1.0],
+            ["Kubernetes", 0.9],
+            ["Helm", 0.8]
+        ]
+    },
+    {
+        "title": "Web Application Security (OWASP)",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/web-application-security-owasp-top-10/",
+        "description": "Master web security and prevent attacks.",
+        "duration_hours": 8.0,
+        "price_usd": 15.0,
+        "rating": 4.6,
+        "skills": [
+            ["OWASP", 1.0],
+            ["OAuth 2.0 / OIDC", 0.9],
+            ["Zero Trust", 0.8]
+        ]
+    },
+    {
+        "title": "Playwright End-to-End Testing",
+        "provider": "Udemy",
+        "url": "https://www.udemy.com/course/playwright-with-typescript-end-to-end-testing/",
+        "description": "Modern E2E testing with Playwright and TypeScript.",
+        "duration_hours": 15.0,
+        "price_usd": 15.0,
+        "rating": 4.8,
+        "skills": [
+            ["Playwright", 1.0],
+            ["TypeScript", 0.9],
+            ["CI/CD", 0.8]
+        ]
     }
 ]

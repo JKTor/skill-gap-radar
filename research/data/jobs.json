@@ -270,5 +270,274 @@
             ["PostgreSQL", 0.8],
             ["Docker", 0.7]
         ]
+    },
+    {
+        "title": "ML Research Engineer",
+        "company": "KBTG",
+        "industry": "fintech",
+        "salary_min": 90000,
+        "salary_max": 180000,
+        "source": "market_research_2025",
+        "skills": [
+            ["PyTorch", 1.0],
+            ["Hugging Face", 0.9],
+            ["Python", 1.0],
+            ["Deep Learning", 0.9],
+            ["Feature Engineering", 0.8]
+        ]
+    },
+    {
+        "title": "ML Research Engineer",
+        "company": "SCB 10X",
+        "industry": "fintech",
+        "salary_min": 100000,
+        "salary_max": 220000,
+        "source": "market_research_2025",
+        "skills": [
+            ["PyTorch", 1.0],
+            ["Hugging Face", 1.0],
+            ["Computer Vision", 0.9],
+            ["Python", 1.0],
+            ["Machine Learning", 0.9]
+        ]
+    },
+    {
+        "title": "Data Analyst",
+        "company": "Central Tech",
+        "industry": "retail",
+        "salary_min": 45000,
+        "salary_max": 85000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Power BI", 1.0],
+            ["SQL", 1.0],
+            ["Python", 0.8],
+            ["Data Analysis", 1.0]
+        ]
+    },
+    {
+        "title": "BI Developer",
+        "company": "PTT Digital",
+        "industry": "energy",
+        "salary_min": 50000,
+        "salary_max": 95000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Tableau", 1.0],
+            ["SQL", 1.0],
+            ["Power BI", 0.7],
+            ["Data Analysis", 0.9]
+        ]
+    },
+    {
+        "title": "Data Platform Engineer",
+        "company": "Lazada",
+        "industry": "ecommerce",
+        "salary_min": 85000,
+        "salary_max": 160000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Snowflake", 1.0],
+            ["Databricks", 0.9],
+            ["Airflow", 0.8],
+            ["Python", 0.9],
+            ["dbt", 0.8]
+        ]
+    },
+    {
+        "title": "Data Platform Engineer",
+        "company": "Grab Thailand",
+        "industry": "technology",
+        "salary_min": 90000,
+        "salary_max": 170000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Databricks", 1.0],
+            ["Snowflake", 0.8],
+            ["Python", 1.0],
+            ["Airflow", 0.9],
+            ["SQL", 1.0]
+        ]
+    },
+    {
+        "title": "Vue.js Developer",
+        "company": "Kasikorn Business-Technology Group",
+        "industry": "fintech",
+        "salary_min": 60000,
+        "salary_max": 120000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Vue.js", 1.0],
+            ["GraphQL", 0.8],
+            ["TypeScript", 0.9],
+            ["Node.js", 0.8]
+        ]
+    },
+    {
+        "title": "Full-stack Developer (Vue)",
+        "company": "CP Group",
+        "industry": "conglomerate",
+        "salary_min": 55000,
+        "salary_max": 110000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Vue.js", 1.0],
+            ["Node.js", 0.9],
+            ["PostgreSQL", 0.8],
+            ["TypeScript", 0.7],
+            ["REST API", 0.9]
+        ]
+    },
+    {
+        "title": "Flutter Developer",
+        "company": "LINE MAN Wongnai",
+        "industry": "technology",
+        "salary_min": 65000,
+        "salary_max": 130000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Flutter", 1.0],
+            ["Dart", 1.0],
+            ["Firebase", 0.9],
+            ["REST API", 0.8],
+            ["App Store Deployment", 0.7]
+        ]
+    },
+    {
+        "title": "Mobile Developer (Flutter)",
+        "company": "SCB TechX",
+        "industry": "fintech",
+        "salary_min": 70000,
+        "salary_max": 140000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Flutter", 1.0],
+            ["Dart", 0.9],
+            ["Firebase", 0.8],
+            ["REST API", 0.9],
+            ["CI/CD", 0.7]
+        ]
+    },
+    {
+        "title": "Search Engineer",
+        "company": "Agoda",
+        "industry": "travel",
+        "salary_min": 90000,
+        "salary_max": 180000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Elasticsearch", 1.0],
+            ["MongoDB", 0.8],
+            ["Redis", 0.9],
+            ["Python", 0.8],
+            ["Docker", 0.7]
+        ]
+    },
+    {
+        "title": "Platform Engineer (Search)",
+        "company": "Lazada",
+        "industry": "ecommerce",
+        "salary_min": 85000,
+        "salary_max": 165000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Elasticsearch", 1.0],
+            ["MongoDB", 0.9],
+            ["RabbitMQ", 0.8],
+            ["gRPC", 0.7],
+            ["Go", 0.8]
+        ]
+    },
+    {
+        "title": "Site Reliability Engineer",
+        "company": "True Digital Group",
+        "industry": "technology",
+        "salary_min": 85000,
+        "salary_max": 170000,
+        "source": "market_research_2025",
+        "skills": [
+            ["ArgoCD", 0.9],
+            ["Helm", 1.0],
+            ["Grafana", 0.9],
+            ["Prometheus", 0.9],
+            ["Kubernetes", 1.0],
+            ["GCP", 0.8]
+        ]
+    },
+    {
+        "title": "SRE (Platform)",
+        "company": "SCB TechX",
+        "industry": "fintech",
+        "salary_min": 90000,
+        "salary_max": 180000,
+        "source": "market_research_2025",
+        "skills": [
+            ["ArgoCD", 1.0],
+            ["Helm", 0.9],
+            ["Grafana", 1.0],
+            ["Kubernetes", 1.0],
+            ["Terraform", 0.8],
+            ["AWS", 0.9]
+        ]
+    },
+    {
+        "title": "Application Security Engineer",
+        "company": "KBTG",
+        "industry": "fintech",
+        "salary_min": 75000,
+        "salary_max": 150000,
+        "source": "market_research_2025",
+        "skills": [
+            ["OAuth 2.0 / OIDC", 1.0],
+            ["OWASP", 1.0],
+            ["Zero Trust", 0.9],
+            ["Network Security", 0.8],
+            ["Python", 0.7]
+        ]
+    },
+    {
+        "title": "Security Engineer",
+        "company": "Accenture Thailand",
+        "industry": "consulting",
+        "salary_min": 65000,
+        "salary_max": 130000,
+        "source": "market_research_2025",
+        "skills": [
+            ["OWASP", 1.0],
+            ["OAuth 2.0 / OIDC", 0.9],
+            ["Zero Trust", 0.8],
+            ["Cloud Computing", 0.7],
+            ["Risk Management", 0.8]
+        ]
+    },
+    {
+        "title": "QA Automation Engineer",
+        "company": "Agoda",
+        "industry": "travel",
+        "salary_min": 70000,
+        "salary_max": 140000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Playwright", 1.0],
+            ["k6", 0.8],
+            ["TypeScript", 1.0],
+            ["CI/CD", 0.9],
+            ["Docker", 0.8]
+        ]
+    },
+    {
+        "title": "Senior QA Automation",
+        "company": "Lazada",
+        "industry": "ecommerce",
+        "salary_min": 75000,
+        "salary_max": 150000,
+        "source": "market_research_2025",
+        "skills": [
+            ["Playwright", 1.0],
+            ["TypeScript", 0.9],
+            ["CI/CD", 0.8],
+            ["k6", 0.7],
+            ["Agile / Scrum", 0.8]
+        ]
     }
 ]

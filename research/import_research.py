@@ -30,14 +30,16 @@ def import_data():
         if not skill:
             # Guess category
             category = "general"
-            infra_skills = ["AWS", "Azure", "Docker", "Kubernetes", "Terraform", "Cloud Computing", "Linux", "Prometheus", "CI/CD"]
-            frontend_skills = ["React", "TypeScript", "Next.js", "CSS"]
-            security_skills = ["Network Security", "Penetration Testing", "SIEM", "Risk Management", "Data Privacy"]
-            data_skills = ["Machine Learning", "Deep Learning", "TensorFlow", "SQL", "Python", "Apache Spark", "Kafka", "Airflow", "BigQuery", "dbt", "Statistics"]
-            backend_skills = ["Go", "Java", "PostgreSQL", "Redis", "Microservices", "REST API", "Node.js", "FastAPI", "System Design"]
-            ai_skills = ["Prompt Engineering", "LangChain", "OpenAI API", "RAG", "Vector DB", "MLflow", "Kubeflow", "Model Monitoring"]
-            mobile_skills = ["Swift", "Kotlin", "React Native", "Firebase", "App Store Deployment"]
+            infra_skills = ["AWS", "Azure", "Docker", "Kubernetes", "Terraform", "Cloud Computing", "Linux", "Prometheus", "CI/CD", "ArgoCD", "Helm", "Grafana", "GCP"]
+            frontend_skills = ["React", "TypeScript", "Next.js", "CSS", "Vue.js", "GraphQL"]
+            security_skills = ["Network Security", "Penetration Testing", "SIEM", "Risk Management", "Data Privacy", "OAuth 2.0 / OIDC", "OWASP", "Zero Trust"]
+            data_skills = ["Machine Learning", "Deep Learning", "TensorFlow", "SQL", "Python", "Apache Spark", "Kafka", "Airflow", "BigQuery", "dbt", "Statistics", "Power BI", "Tableau", "Snowflake", "Databricks", "Data Analysis", "Feature Engineering"]
+            backend_skills = ["Go", "Java", "PostgreSQL", "Redis", "Microservices", "REST API", "Node.js", "FastAPI", "System Design", "MongoDB", "Elasticsearch", "RabbitMQ", "gRPC"]
+            ai_skills = ["Prompt Engineering", "LangChain", "OpenAI API", "RAG", "Vector DB", "MLflow", "Kubeflow", "Model Monitoring", "PyTorch", "Hugging Face", "Computer Vision"]
+            mobile_skills = ["Swift", "Kotlin", "React Native", "Firebase", "App Store Deployment", "Flutter", "Dart"]
             design_skills = ["Figma", "User Research", "Prototyping", "Design Systems", "Usability Testing"]
+            testing_skills = ["Playwright", "k6"]
+            process_skills = ["Agile / Scrum"]
             domain_skills = ["HL7/FHIR", "Financial Modeling", "Blockchain", "Payment Gateway"]
             
             if name in infra_skills: category = "infrastructure"
@@ -48,6 +50,8 @@ def import_data():
             elif name in ai_skills: category = "ai"
             elif name in mobile_skills: category = "mobile"
             elif name in design_skills: category = "design"
+            elif name in testing_skills: category = "testing"
+            elif name in process_skills: category = "process"
             elif name in domain_skills: category = "domain"
             
             skill = Skill(name=name, category=category)
