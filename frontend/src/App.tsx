@@ -26,6 +26,7 @@ import {
   type SkillRead,
 } from './api'
 import { useLang } from './LangContext'
+import { useTheme } from './ThemeContext'
 import HowToUse from './pages/HowToUse'
 import './App.css'
 
@@ -33,6 +34,7 @@ type Page = 'radar' | 'guide'
 
 function App() {
   const { lang, T, toggle } = useLang()
+  const { theme, toggle: toggleTheme } = useTheme()
   const [page, setPage] = useState<Page>('guide')
 
   // ─── Backend state ────────────────────────────────────────────────────────
@@ -135,6 +137,9 @@ function App() {
         </button>
         <button className="lang-toggle" onClick={toggle} aria-label="Switch language">
           {lang === 'th' ? '🇬🇧 EN' : '🇹🇭 TH'}
+        </button>
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+          {theme === 'light' ? '🌙' : '☀️'}
         </button>
       </nav>
 
@@ -286,7 +291,7 @@ function App() {
                         <span>{T.largestGap}</span>
                         <strong>{topGap.skill_name}</strong>
                       </div>
-                      <b>{Math.round(topGap.gap * 100)} pts</b>
+                      <b>{Math.round(topGap.gap * 100)}%</b>
                     </div>
                   )}
                   {readiness !== null && (
@@ -331,7 +336,7 @@ function App() {
                       <span className="bar-demand" style={{ width: `${Math.round(gap.required_level * 100)}%` }} />
                       <span className="bar-current" style={{ width: `${Math.round(gap.current_level * 100)}%` }} />
                     </div>
-                    <b>{Math.round(gap.gap * 100)} pts</b>
+                    <b>{Math.round(gap.gap * 100)}%</b>
                   </div>
                 ))}
               </section>
