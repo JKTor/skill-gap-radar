@@ -7,10 +7,13 @@ import {
   Sparkles,
   Target,
 } from 'lucide-react'
+import { useLang } from '../LangContext'
 
 type Props = { onStart: () => void }
 
 export default function HowToUse({ onStart }: Props) {
+  const { T } = useLang()
+
   return (
     <div className="guide-shell">
       {/* Hero */}
@@ -18,60 +21,57 @@ export default function HowToUse({ onStart }: Props) {
         <span className="brand-mark" style={{ width: 56, height: 56 }}>
           <Radar size={28} aria-hidden="true" />
         </span>
-        <h1>Skill-Gap Radar</h1>
+        <h1>{T.heroTitle}</h1>
         <p className="guide-subtitle">
-          เครื่องมือวิเคราะห์ช่องว่างทักษะของคุณ<br />
-          เทียบกับตลาดงานจริงในประเทศไทย
+          {T.heroSubtitle.split('\n').map((line, i) => (
+            <span key={i}>{line}{i === 0 && <br />}</span>
+          ))}
         </p>
         <button className="cta-button" onClick={onStart}>
-          เริ่มใช้งานเลย →
+          {T.heroBtn}
         </button>
       </header>
 
       {/* What is it */}
       <section className="guide-section">
-        <h2>เว็บนี้คืออะไร?</h2>
-        <p>
-          Skill-Gap Radar ช่วยให้คุณรู้ว่า <strong>ทักษะที่มีอยู่ตอนนี้ห่างจากตำแหน่งงานที่อยากได้แค่ไหน</strong>{' '}
-          โดยเปรียบเทียบกับข้อมูลงานจริงจากบริษัทชั้นนำในไทย เช่น KBank, Agoda, Bitkub, AIS
-          และแนะนำ course ที่ช่วยปิด gap ได้เร็วที่สุด
-        </p>
+        <h2>{T.whatTitle}</h2>
+        <p>{T.whatBody}</p>
       </section>
 
       {/* Steps */}
       <section className="guide-section">
-        <h2>วิธีใช้งาน</h2>
+        <h2>{T.howTitle}</h2>
         <ol className="guide-steps">
           <li>
             <span className="step-icon"><Search size={20} /></span>
             <div>
-              <h3>เลือก Target Role</h3>
-              <p>พิมพ์หรือเลือกตำแหน่งงานที่อยากได้ใน dropdown ด้านซ้าย เช่น "Data Scientist", "Blockchain Developer"</p>
+              <h3>{T.step1Title}</h3>
+              <p>{T.step1Body}</p>
             </div>
           </li>
           <li>
             <span className="step-icon"><CheckCircle2 size={20} /></span>
             <div>
-              <h3>ติ๊กทักษะที่มีอยู่แล้ว</h3>
-              <p>เลือกทักษะที่คุณมีในส่วน "Your skills" ด้านซ้าย ระบบจะคำนวณ gap ให้อัตโนมัติทันที</p>
+              <h3>{T.step2Title}</h3>
+              <p>{T.step2Body}</p>
             </div>
           </li>
           <li>
             <span className="step-icon"><BarChart3 size={20} /></span>
             <div>
-              <h3>ดูผลวิเคราะห์</h3>
+              <h3>{T.step3Title}</h3>
               <p>
-                <strong>Skill radar</strong> — แสดงระดับทักษะของคุณเทียบกับที่ตลาดต้องการ<br />
-                <strong>Skill gaps</strong> — รายการทักษะที่ขาด เรียงจากสำคัญมากสุด<br />
-                <strong>Readiness %</strong> — คะแนนความพร้อมโดยรวม
+                {T.step3Body.split('\n').map((line, i) => (
+                  <span key={i}>{i > 0 && <br />}{line}</span>
+                ))}
               </p>
             </div>
           </li>
           <li>
             <span className="step-icon"><BookOpenCheck size={20} /></span>
             <div>
-              <h3>เรียน course ที่แนะนำ</h3>
-              <p>ระบบเลือก course ที่ปิด gap ได้มากที่สุดก่อน พร้อม rating, ราคา และลิงก์ไปยัง platform จริง</p>
+              <h3>{T.step4Title}</h3>
+              <p>{T.step4Body}</p>
             </div>
           </li>
         </ol>
@@ -79,33 +79,30 @@ export default function HowToUse({ onStart }: Props) {
 
       {/* What results mean */}
       <section className="guide-section">
-        <h2>ตัวเลขหมายความว่าอะไร?</h2>
+        <h2>{T.metricsTitle}</h2>
         <div className="guide-metrics">
           <div className="metric-card">
             <Target size={24} />
-            <h3>Gap Score</h3>
-            <p>0% = ทักษะครบ ไม่มี gap<br />100% = ทักษะขาดทั้งหมด<br />ยิ่งน้อยยิ่งดี</p>
+            <h3>{T.metric1Title}</h3>
+            <p>{T.metric1Body.split('\n').map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}</p>
           </div>
           <div className="metric-card">
             <Sparkles size={24} />
-            <h3>Readiness %</h3>
-            <p>75%+ = พร้อม apply ได้เลย<br />ต่ำกว่า 75% = ควรฝึกเพิ่มก่อน</p>
+            <h3>{T.metric2Title}</h3>
+            <p>{T.metric2Body.split('\n').map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}</p>
           </div>
           <div className="metric-card">
             <BarChart3 size={24} />
-            <h3>Gap Bar</h3>
-            <p>แถบสีเข้ม = ระดับที่ตลาดต้องการ<br />แถบสีอ่อน = ระดับที่คุณมี<br />ระยะห่าง = gap ที่ต้องปิด</p>
+            <h3>{T.metric3Title}</h3>
+            <p>{T.metric3Body.split('\n').map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}</p>
           </div>
         </div>
       </section>
 
       {/* Data source */}
       <section className="guide-section">
-        <h2>ข้อมูลมาจากไหน?</h2>
-        <p>
-          ข้อมูลงานและ course รวบรวมจากตลาดงานไทยและ platform เรียนออนไลน์ชั้นนำ ครอบคลุมสาย
-          FinTech, Cloud, Cybersecurity, AI/ML และ Frontend Development
-        </p>
+        <h2>{T.dataTitle}</h2>
+        <p>{T.dataBody}</p>
         <div className="company-chips">
           {['KBank', 'SCB', 'Bitkub', 'TMB Thanachart', 'True Digital', 'G-Able', 'Agoda', 'AIS'].map((c) => (
             <span key={c} className="chip">{c}</span>
@@ -115,7 +112,7 @@ export default function HowToUse({ onStart }: Props) {
 
       <div style={{ textAlign: 'center', paddingBottom: 48 }}>
         <button className="cta-button" onClick={onStart}>
-          เริ่มวิเคราะห์ทักษะของคุณ →
+          {T.ctaBottom}
         </button>
       </div>
     </div>

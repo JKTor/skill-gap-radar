@@ -25,12 +25,14 @@ import {
   type SkillGapAnalysis,
   type SkillRead,
 } from './api'
+import { useLang } from './LangContext'
 import HowToUse from './pages/HowToUse'
 import './App.css'
 
 type Page = 'radar' | 'guide'
 
 function App() {
+  const { lang, T, toggle } = useLang()
   const [page, setPage] = useState<Page>('guide')
 
   // ─── Backend state ────────────────────────────────────────────────────────
@@ -50,7 +52,6 @@ function App() {
   // ─── Bootstrap ────────────────────────────────────────────────────────────
   useEffect(() => {
     let alive = true
-
     Promise.all([getHealth(), getJobTitles(), getSkills()])
       .then(([health, titles, skills]) => {
         if (!alive) return
@@ -63,32 +64,24 @@ function App() {
           setQuery(titles[0].title)
         }
       })
-      .catch(() => {
-        if (alive) setApiMode('mock')
-      })
-
+      .catch(() => { if (alive) setApiMode('mock') })
     return () => { alive = false }
   }, [])
 
-  // ─── Auto-analyse when role or skills change (debounced) ──────────────────
+  // ─── Auto-analyse ─────────────────────────────────────────────────────────
   useEffect(() => {
     if (apiMode !== 'connected' || !selectedRole) return
-
     const timer = setTimeout(() => {
       setAnalyzing(true)
-      quickAnalysis(
-        selectedRole,
-        selectedSkills.map((name) => ({ name, level: 0.7 })),
-      )
+      quickAnalysis(selectedRole, selectedSkills.map((name) => ({ name, level: 0.7 })))
         .then(setAnalysis)
         .catch(console.error)
         .finally(() => setAnalyzing(false))
     }, 400)
-
     return () => clearTimeout(timer)
   }, [apiMode, selectedRole, selectedSkills])
 
-  // ─── Derived display data ─────────────────────────────────────────────────
+  // ─── Derived ──────────────────────────────────────────────────────────────
   const filteredTitles = useMemo(
     () => jobTitles.filter((j) => j.title.toLowerCase().includes(query.toLowerCase())),
     [jobTitles, query],
@@ -105,7 +98,6 @@ function App() {
 
   const topGap = gaps[0] ?? null
 
-  // ─── Handlers ─────────────────────────────────────────────────────────────
   const chooseRole = useCallback((title: string) => {
     setSelectedRole(title)
     setQuery(title)
@@ -132,263 +124,266 @@ function App() {
           onClick={() => setPage('guide')}
         >
           <HelpCircle size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 5 }} />
-          วิธีใช้
+          {T.navGuide}
         </button>
         <button
           className={`nav-tab ${page === 'radar' ? 'active' : ''}`}
           onClick={() => setPage('radar')}
         >
           <Radar size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 5 }} />
-          วิเคราะห์ทักษะ
+          {T.navRadar}
+        </button>
+        <button className="lang-toggle" onClick={toggle} aria-label="Switch language">
+          {lang === 'th' ? '🇬🇧 EN' : '🇹🇭 TH'}
         </button>
       </nav>
 
       {/* ── Pages ─────────────────────────────────────────────────────── */}
       {page === 'guide' && <HowToUse onStart={() => setPage('radar')} />}
       {page === 'radar' && (
-    <main className="app-shell">
-      {/* ── Sidebar ─────────────────────────────────────────────────────── */}
-      <aside className="sidebar" aria-label="Skill-Gap Radar controls">
-        <div className="brand">
-          <span className="brand-mark">
-            <Radar size={22} aria-hidden="true" />
-          </span>
-          <div>
-            <p className="eyebrow">Skill-Gap Radar</p>
-            <h1>Career fit workspace</h1>
-          </div>
-        </div>
-
-        {/* Role picker */}
-        <section className="control-section">
-          <label htmlFor="role-search">Target role</label>
-          <div className="autocomplete">
-            <Search size={18} aria-hidden="true" />
-            <input
-              id="role-search"
-              value={query}
-              onChange={(e) => { setQuery(e.target.value); setIsRoleMenuOpen(true) }}
-              onFocus={() => setIsRoleMenuOpen(true)}
-              placeholder={apiMode === 'connected' ? 'Search role…' : 'Loading roles…'}
-              disabled={apiMode === 'checking'}
-            />
-            <button
-              type="button"
-              className="icon-button"
-              aria-label="Show roles"
-              onClick={() => setIsRoleMenuOpen((o) => !o)}
-            >
-              <ChevronDown size={18} aria-hidden="true" />
-            </button>
-          </div>
-          {isRoleMenuOpen && filteredTitles.length > 0 && (
-            <div className="role-menu">
-              {filteredTitles.map((j) => (
-                <button key={j.title} type="button" onClick={() => chooseRole(j.title)}>
-                  <BriefcaseBusiness size={16} aria-hidden="true" />
-                  <span>{j.title}</span>
-                  <small style={{ marginLeft: 'auto', opacity: 0.5 }}>{j.industry}</small>
-                </button>
-              ))}
+        <main className="app-shell">
+          {/* ── Sidebar ───────────────────────────────────────────────── */}
+          <aside className="sidebar" aria-label="Skill-Gap Radar controls">
+            <div className="brand">
+              <span className="brand-mark">
+                <Radar size={22} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="eyebrow">Skill-Gap Radar</p>
+                <h1>{T.navRadar}</h1>
+              </div>
             </div>
-          )}
-        </section>
 
-        {/* Skill picker */}
-        <section className="control-section">
-          <div className="section-title">
-            <label>Your skills</label>
-            <span>{selectedSkills.length} selected</span>
-          </div>
-          <div className="skill-picker">
-            {allSkills.map((skill) => {
-              const selected = selectedSkills.includes(skill.name)
-              return (
+            {/* Role picker */}
+            <section className="control-section">
+              <label htmlFor="role-search">{T.targetRole}</label>
+              <div className="autocomplete">
+                <Search size={18} aria-hidden="true" />
+                <input
+                  id="role-search"
+                  value={query}
+                  onChange={(e) => { setQuery(e.target.value); setIsRoleMenuOpen(true) }}
+                  onFocus={() => setIsRoleMenuOpen(true)}
+                  placeholder={apiMode === 'connected' ? T.searchPlaceholder : T.loadingRoles}
+                  disabled={apiMode === 'checking'}
+                />
                 <button
-                  key={skill.id}
                   type="button"
-                  className={selected ? 'selected' : ''}
-                  onClick={() => toggleSkill(skill.name)}
+                  className="icon-button"
+                  aria-label="Show roles"
+                  onClick={() => setIsRoleMenuOpen((o) => !o)}
                 >
-                  {selected ? <Check size={14} aria-hidden="true" /> : <span />}
-                  {skill.name}
+                  <ChevronDown size={18} aria-hidden="true" />
                 </button>
-              )
-            })}
-          </div>
-        </section>
-      </aside>
-
-      {/* ── Workspace ───────────────────────────────────────────────────── */}
-      <section className="workspace">
-        <header className="workspace-header">
-          <div>
-            <p className="eyebrow">Target scan</p>
-            <h2>{selectedRole || '—'}</h2>
-            <p>
-              {analysis
-                ? `${analysis.matched_jobs} matching job${analysis.matched_jobs !== 1 ? 's' : ''} in market`
-                : apiMode === 'mock' ? 'Backend offline — mock mode' : 'Select a role to analyse'}
-            </p>
-          </div>
-          <div className="header-actions" aria-label="Role metrics">
-            <div className={`api-status ${apiMode}`}>
-              <span>Backend</span>
-              <strong>
-                {apiMode === 'connected' ? apiHealth?.status
-                  : apiMode === 'checking' ? 'Checking…'
-                  : 'Mock mode'}
-              </strong>
-            </div>
-            {readiness !== null && (
-              <div>
-                <span>Readiness</span>
-                <strong>{analyzing ? '…' : `${readiness}%`}</strong>
               </div>
-            )}
-            {analysis && (
-              <div>
-                <span>Gap score</span>
-                <strong>{analyzing ? '…' : `${Math.round(analysis.gap_score * 100)}%`}</strong>
-              </div>
-            )}
-          </div>
-        </header>
-
-        {/* Radar + insight */}
-        {gaps.length > 0 && (
-          <div className="dashboard-grid">
-            <section className="radar-panel" aria-label="Skill demand radar">
-              <div className="panel-heading">
-                <div>
-                  <p className="eyebrow">Demand vs profile</p>
-                  <h3>Skill radar</h3>
+              {isRoleMenuOpen && filteredTitles.length > 0 && (
+                <div className="role-menu">
+                  {filteredTitles.map((j) => (
+                    <button key={j.title} type="button" onClick={() => chooseRole(j.title)}>
+                      <BriefcaseBusiness size={16} aria-hidden="true" />
+                      <span>{j.title}</span>
+                      <small style={{ marginLeft: 'auto', opacity: 0.5 }}>{j.industry}</small>
+                    </button>
+                  ))}
                 </div>
-                <Sparkles size={20} aria-hidden="true" />
+              )}
+            </section>
+
+            {/* Skill picker */}
+            <section className="control-section">
+              <div className="section-title">
+                <label>{T.yourSkills}</label>
+                <span>{T.selectedCount(selectedSkills.length)}</span>
               </div>
-              <div className="radar-visual">
-                {gaps.slice(0, 5).map((gap, i) => (
-                  <div
-                    key={gap.skill_id}
-                    className={`radar-node node-${i + 1}`}
-                    style={{ ['--score' as string]: `${Math.round(gap.current_level * 100)}%` }}
-                  >
-                    <span>{gap.skill_name}</span>
-                    <strong>{Math.round(gap.current_level * 100)}</strong>
+              <div className="skill-picker">
+                {allSkills.map((skill) => {
+                  const selected = selectedSkills.includes(skill.name)
+                  return (
+                    <button
+                      key={skill.id}
+                      type="button"
+                      className={selected ? 'selected' : ''}
+                      onClick={() => toggleSkill(skill.name)}
+                    >
+                      {selected ? <Check size={14} aria-hidden="true" /> : <span />}
+                      {skill.name}
+                    </button>
+                  )
+                })}
+              </div>
+            </section>
+          </aside>
+
+          {/* ── Workspace ─────────────────────────────────────────────── */}
+          <section className="workspace">
+            <header className="workspace-header">
+              <div>
+                <p className="eyebrow">{T.targetScan}</p>
+                <h2>{selectedRole || '—'}</h2>
+                <p>
+                  {analysis
+                    ? T.matchingJobs(analysis.matched_jobs)
+                    : apiMode === 'mock' ? T.backendOffline : T.selectRole}
+                </p>
+              </div>
+              <div className="header-actions" aria-label="Role metrics">
+                <div className={`api-status ${apiMode}`}>
+                  <span>{T.backendLabel}</span>
+                  <strong>
+                    {apiMode === 'connected' ? apiHealth?.status
+                      : apiMode === 'checking' ? T.checking
+                      : T.mockMode}
+                  </strong>
+                </div>
+                {readiness !== null && (
+                  <div>
+                    <span>{T.readinessLabel}</span>
+                    <strong>{analyzing ? '…' : `${readiness}%`}</strong>
+                  </div>
+                )}
+                {analysis && (
+                  <div>
+                    <span>{T.gapScoreLabel}</span>
+                    <strong>{analyzing ? '…' : `${Math.round(analysis.gap_score * 100)}%`}</strong>
+                  </div>
+                )}
+              </div>
+            </header>
+
+            {/* Radar + insight */}
+            {gaps.length > 0 && (
+              <div className="dashboard-grid">
+                <section className="radar-panel" aria-label="Skill demand radar">
+                  <div className="panel-heading">
+                    <div>
+                      <p className="eyebrow">{T.demandVsProfile}</p>
+                      <h3>{T.skillRadar}</h3>
+                    </div>
+                    <Sparkles size={20} aria-hidden="true" />
+                  </div>
+                  <div className="radar-visual">
+                    {gaps.slice(0, 5).map((gap, i) => (
+                      <div
+                        key={gap.skill_id}
+                        className={`radar-node node-${i + 1}`}
+                        style={{ ['--score' as string]: `${Math.round(gap.current_level * 100)}%` }}
+                      >
+                        <span>{gap.skill_name}</span>
+                        <strong>{Math.round(gap.current_level * 100)}</strong>
+                      </div>
+                    ))}
+                    <div className="radar-ring ring-large" />
+                    <div className="radar-ring ring-mid" />
+                    <div className="radar-ring ring-small" />
+                  </div>
+                </section>
+
+                <section className="insight-panel">
+                  {topGap && (
+                    <div className="metric-row">
+                      <Target size={20} aria-hidden="true" />
+                      <div>
+                        <span>{T.largestGap}</span>
+                        <strong>{topGap.skill_name}</strong>
+                      </div>
+                      <b>{Math.round(topGap.gap * 100)} pts</b>
+                    </div>
+                  )}
+                  {readiness !== null && (
+                    <div className="metric-row">
+                      <TrendingUp size={20} aria-hidden="true" />
+                      <div>
+                        <span>{T.marketFit}</span>
+                        <strong>{readiness >= 75 ? T.readyToApply : T.needsPrep}</strong>
+                      </div>
+                      <b>{readiness}%</b>
+                    </div>
+                  )}
+                  <div className="metric-row">
+                    <Clock3 size={20} aria-hidden="true" />
+                    <div>
+                      <span>{T.suggestedSprint}</span>
+                      <strong>{T.weeks}</strong>
+                    </div>
+                    <b>{T.focusSkills(Math.min(gaps.length, 3))}</b>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* Gap table */}
+            {gaps.length > 0 && (
+              <section className="gap-table" aria-label="Skill gaps">
+                <div className="panel-heading">
+                  <div>
+                    <p className="eyebrow">{T.priorityList}</p>
+                    <h3>{T.skillGaps}</h3>
+                  </div>
+                  <BarChart3 size={20} aria-hidden="true" />
+                </div>
+                {gaps.map((gap) => (
+                  <div className="gap-row" key={gap.skill_id}>
+                    <div>
+                      <strong>{gap.skill_name}</strong>
+                      <span>{gap.skill_category}</span>
+                    </div>
+                    <div className="bar-track" aria-hidden="true">
+                      <span className="bar-demand" style={{ width: `${Math.round(gap.required_level * 100)}%` }} />
+                      <span className="bar-current" style={{ width: `${Math.round(gap.current_level * 100)}%` }} />
+                    </div>
+                    <b>{Math.round(gap.gap * 100)} pts</b>
                   </div>
                 ))}
-                <div className="radar-ring ring-large" />
-                <div className="radar-ring ring-mid" />
-                <div className="radar-ring ring-small" />
-              </div>
-            </section>
+              </section>
+            )}
 
-            <section className="insight-panel">
-              {topGap && (
-                <div className="metric-row">
-                  <Target size={20} aria-hidden="true" />
+            {/* Course recommendations */}
+            {courses.length > 0 && (
+              <section className="learning-plan" aria-label="Course recommendations">
+                <div className="panel-heading">
                   <div>
-                    <span>Largest gap</span>
-                    <strong>{topGap.skill_name}</strong>
+                    <p className="eyebrow">{T.nextActions}</p>
+                    <h3>{T.recommendedCourses}</h3>
                   </div>
-                  <b>{Math.round(topGap.gap * 100)} pts</b>
+                  <BookOpenCheck size={20} aria-hidden="true" />
                 </div>
-              )}
-              {readiness !== null && (
-                <div className="metric-row">
-                  <TrendingUp size={20} aria-hidden="true" />
-                  <div>
-                    <span>Market fit</span>
-                    <strong>{readiness >= 75 ? 'Ready to apply' : 'Needs focused prep'}</strong>
-                  </div>
-                  <b>{readiness}%</b>
-                </div>
-              )}
-              <div className="metric-row">
-                <Clock3 size={20} aria-hidden="true" />
-                <div>
-                  <span>Suggested sprint</span>
-                  <strong>4 weeks</strong>
-                </div>
-                <b>{Math.min(gaps.length, 3)} focus skills</b>
-              </div>
-            </section>
-          </div>
-        )}
-
-        {/* Gap table */}
-        {gaps.length > 0 && (
-          <section className="gap-table" aria-label="Skill gaps">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Priority list</p>
-                <h3>Skill gaps</h3>
-              </div>
-              <BarChart3 size={20} aria-hidden="true" />
-            </div>
-            {gaps.map((gap) => (
-              <div className="gap-row" key={gap.skill_id}>
-                <div>
-                  <strong>{gap.skill_name}</strong>
-                  <span>{gap.skill_category}</span>
-                </div>
-                <div className="bar-track" aria-hidden="true">
-                  <span className="bar-demand" style={{ width: `${Math.round(gap.required_level * 100)}%` }} />
-                  <span className="bar-current" style={{ width: `${Math.round(gap.current_level * 100)}%` }} />
-                </div>
-                <b>{Math.round(gap.gap * 100)} pts</b>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {/* Course recommendations */}
-        {courses.length > 0 && (
-          <section className="learning-plan" aria-label="Course recommendations">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Next actions</p>
-                <h3>Recommended courses</h3>
-              </div>
-              <BookOpenCheck size={20} aria-hidden="true" />
-            </div>
-            {courses.slice(0, 5).map((course, i) => (
-              <article key={course.course_id} className="plan-item">
-                <span>{i + 1}</span>
-                <div>
-                  <h4>{course.course_title}</h4>
-                  <p>
-                    {course.provider}
-                    {course.rating && (
-                      <> · <Star size={12} aria-hidden="true" style={{ display: 'inline', verticalAlign: 'middle' }} /> {course.rating}</>
+                {courses.slice(0, 5).map((course, i) => (
+                  <article key={course.course_id} className="plan-item">
+                    <span>{i + 1}</span>
+                    <div>
+                      <h4>{course.course_title}</h4>
+                      <p>
+                        {course.provider}
+                        {course.rating && (
+                          <> · <Star size={12} aria-hidden="true" style={{ display: 'inline', verticalAlign: 'middle' }} /> {course.rating}</>
+                        )}
+                        {course.price_usd !== undefined && course.price_usd !== null && (
+                          <> · {course.price_usd === 0 ? T.free : `$${course.price_usd}`}</>
+                        )}
+                      </p>
+                      <p style={{ fontSize: '0.75rem', opacity: 0.6 }}>
+                        {T.covers} {course.covers_skills.join(', ')}
+                      </p>
+                    </div>
+                    {course.url && (
+                      <a href={course.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${course.course_title}`}>
+                        <ExternalLink size={16} aria-hidden="true" />
+                      </a>
                     )}
-                    {course.price_usd !== undefined && course.price_usd !== null && (
-                      <> · {course.price_usd === 0 ? 'Free' : `$${course.price_usd}`}</>
-                    )}
-                  </p>
-                  <p style={{ fontSize: '0.75rem', opacity: 0.6 }}>
-                    Covers: {course.covers_skills.join(', ')}
-                  </p>
-                </div>
-                {course.url && (
-                  <a href={course.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${course.course_title}`}>
-                    <ExternalLink size={16} aria-hidden="true" />
-                  </a>
-                )}
-              </article>
-            ))}
-          </section>
-        )}
+                  </article>
+                ))}
+              </section>
+            )}
 
-        {/* Empty state */}
-        {apiMode === 'connected' && !analyzing && gaps.length === 0 && selectedRole && (
-          <div style={{ padding: '48px', textAlign: 'center', opacity: 0.5 }}>
-            <Sparkles size={32} />
-            <p>No skill gaps found for <strong>{selectedRole}</strong> with your current skill selection.</p>
-          </div>
-        )}
-      </section>
-    </main>
+            {/* Empty state */}
+            {apiMode === 'connected' && !analyzing && gaps.length === 0 && selectedRole && (
+              <div style={{ padding: '48px', textAlign: 'center', opacity: 0.5 }}>
+                <Sparkles size={32} />
+                <p>{T.emptyGap(selectedRole)}</p>
+              </div>
+            )}
+          </section>
+        </main>
       )}
     </div>
   )
