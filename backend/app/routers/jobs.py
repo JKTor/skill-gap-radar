@@ -9,6 +9,13 @@ from app.schemas.job import JobCreate, JobRead
 router = APIRouter(prefix="/jobs", tags=["jobs"])
 
 
+@router.get("/titles")
+def list_job_titles(db: Session = Depends(get_db)):
+    """Distinct job titles for frontend role picker."""
+    rows = db.query(Job.title, Job.industry).distinct(Job.title).order_by(Job.title).all()
+    return [{"title": r.title, "industry": r.industry} for r in rows]
+
+
 @router.get("/", response_model=list[JobRead])
 def list_jobs(
     industry: str | None = Query(default=None),

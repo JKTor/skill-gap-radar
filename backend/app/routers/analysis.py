@@ -4,9 +4,16 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.user import User
 from app.schemas.analysis import SkillGapResult
-from app.services.skill_gap import analyze_skill_gap
+from app.schemas.quick import QuickAnalysisRequest
+from app.services.skill_gap import analyze_skill_gap, quick_analyze
 
 router = APIRouter(prefix="/analysis", tags=["analysis"])
+
+
+@router.post("/quick", response_model=SkillGapResult)
+def quick_skill_gap(payload: QuickAnalysisRequest, db: Session = Depends(get_db)):
+    """Stateless analysis — no account needed. Send your skills + target role, get gaps back."""
+    return quick_analyze(db, payload.target_role, [s.model_dump() for s in payload.skills])
 
 
 @router.get("/skill-gap/{user_id}", response_model=SkillGapResult)
