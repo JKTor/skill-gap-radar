@@ -7,13 +7,13 @@ import {
   ChevronDown,
   Clock3,
   ExternalLink,
+  HelpCircle,
   Radar,
   Search,
   Sparkles,
   Star,
   Target,
   TrendingUp,
-  X,
 } from 'lucide-react'
 import {
   getHealth,
@@ -25,9 +25,14 @@ import {
   type SkillGapAnalysis,
   type SkillRead,
 } from './api'
+import HowToUse from './pages/HowToUse'
 import './App.css'
 
+type Page = 'radar' | 'guide'
+
 function App() {
+  const [page, setPage] = useState<Page>('guide')
+
   // ─── Backend state ────────────────────────────────────────────────────────
   const [apiHealth, setApiHealth] = useState<ApiHealth | null>(null)
   const [apiMode, setApiMode] = useState<'checking' | 'connected' | 'mock'>('checking')
@@ -115,6 +120,32 @@ function App() {
 
   // ─── Render ───────────────────────────────────────────────────────────────
   return (
+    <div className="page-wrapper">
+      {/* ── Top nav ───────────────────────────────────────────────────── */}
+      <nav className="top-nav">
+        <span className="brand-mark">
+          <Radar size={16} aria-hidden="true" />
+        </span>
+        <span className="top-nav-title">Skill-Gap Radar</span>
+        <button
+          className={`nav-tab ${page === 'guide' ? 'active' : ''}`}
+          onClick={() => setPage('guide')}
+        >
+          <HelpCircle size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 5 }} />
+          วิธีใช้
+        </button>
+        <button
+          className={`nav-tab ${page === 'radar' ? 'active' : ''}`}
+          onClick={() => setPage('radar')}
+        >
+          <Radar size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 5 }} />
+          วิเคราะห์ทักษะ
+        </button>
+      </nav>
+
+      {/* ── Pages ─────────────────────────────────────────────────────── */}
+      {page === 'guide' && <HowToUse onStart={() => setPage('radar')} />}
+      {page === 'radar' && (
     <main className="app-shell">
       {/* ── Sidebar ─────────────────────────────────────────────────────── */}
       <aside className="sidebar" aria-label="Skill-Gap Radar controls">
@@ -358,6 +389,8 @@ function App() {
         )}
       </section>
     </main>
+      )}
+    </div>
   )
 }
 
