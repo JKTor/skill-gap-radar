@@ -55,3 +55,15 @@ export const quickAnalysis = (target_role: string, skills: QuickSkillInput[]) =>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ target_role, skills }),
   })
+
+export type VisitStats = {
+  total: number
+  today: number
+  this_week: number
+  daily: { date: string; count: number }[]
+}
+
+export const recordVisit = (page = 'home') =>
+  request<{ recorded: boolean }>(`/visits/?page=${page}`, { method: 'POST' })
+
+export const getVisitStats = () => request<VisitStats>('/visits/stats')

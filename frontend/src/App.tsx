@@ -14,12 +14,14 @@ import {
   Star,
   Target,
   TrendingUp,
+  Users,
 } from 'lucide-react'
 import {
   getHealth,
   getJobTitles,
   getSkills,
   quickAnalysis,
+  recordVisit,
   type ApiHealth,
   type JobTitle,
   type SkillGapAnalysis,
@@ -28,9 +30,10 @@ import {
 import { useLang } from './LangContext'
 import { useTheme } from './ThemeContext'
 import HowToUse from './pages/HowToUse'
+import Stats from './pages/Stats'
 import './App.css'
 
-type Page = 'radar' | 'guide'
+type Page = 'radar' | 'guide' | 'stats'
 
 function App() {
   const { lang, T, toggle } = useLang()
@@ -67,6 +70,7 @@ function App() {
           setSelectedRole(titles[0].title)
           setQuery(titles[0].title)
         }
+        recordVisit('home').catch(() => {})
       })
       .catch(() => { if (alive) setApiMode('mock') })
     return () => { alive = false }
@@ -155,6 +159,13 @@ function App() {
           <Radar size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 5 }} />
           {T.navRadar}
         </button>
+        <button
+          className={`nav-tab ${page === 'stats' ? 'active' : ''}`}
+          onClick={() => setPage('stats')}
+        >
+          <Users size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 5 }} />
+          {T.navStats}
+        </button>
         <button className="lang-toggle" onClick={toggle} aria-label="Switch language">
           {lang === 'th' ? '🇬🇧 EN' : '🇹🇭 TH'}
         </button>
@@ -165,6 +176,7 @@ function App() {
 
       {/* ── Pages ─────────────────────────────────────────────────────── */}
       {page === 'guide' && <HowToUse onStart={() => setPage('radar')} />}
+      {page === 'stats' && <Stats />}
       {page === 'radar' && (
         <main className="app-shell">
           {/* ── Sidebar ───────────────────────────────────────────────── */}

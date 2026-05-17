@@ -75,6 +75,17 @@ export const t = {
     free: 'ฟรี',
     covers: 'ครอบคลุม:',
     emptyGap: (role: string) => `ไม่พบ skill gap สำหรับ "${role}" ด้วยทักษะที่เลือกไว้`,
+
+    // Stats page
+    navStats: 'ผู้เข้าชม',
+    statsTitle: 'สถิติผู้เข้าชม',
+    statsSubtitle: 'จำนวนคนที่เข้ามาใช้ Skill-Gap Radar',
+    statTotal: 'ผู้เข้าชมทั้งหมด',
+    statToday: 'วันนี้',
+    statWeek: '7 วันที่ผ่านมา',
+    statChart: '7 วันย้อนหลัง',
+    statsLoading: 'กำลังโหลดสถิติ…',
+    statsError: 'ไม่สามารถโหลดสถิติได้',
   },
 
   en: {
@@ -151,5 +162,16 @@ export const t = {
     free: 'Free',
     covers: 'Covers:',
     emptyGap: (role: string) => `No skill gaps found for "${role}" with your current selection`,
+
+    // Stats page
+    navStats: 'Visitors',
+    statsTitle: 'Visitor Stats',
+    statsSubtitle: 'People who have used Skill-Gap Radar',
+    statTotal: 'Total visitors',
+    statToday: 'Today',
+    statWeek: 'Last 7 days',
+    statChart: 'Last 7 days',
+    statsLoading: 'Loading stats…',
+    statsError: 'Could not load stats',
   },
 } as const
