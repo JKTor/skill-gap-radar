@@ -62,11 +62,12 @@ export default function Stats({ apiMode }: { apiMode: ApiMode }) {
       )}
 
       {stats && (
-        <div className="stats-cards">
-          <div className="stats-card accent">
-            <Users size={28} />
-            <span className="stats-number">{stats.total.toLocaleString()}</span>
-            <span className="stats-label">{T.statTotal}</span>
+        <div style={{ textAlign: 'center', padding: '48px 0' }}>
+          <div style={{ fontSize: '6rem', fontWeight: 800, lineHeight: 1 }}>
+            {stats.total.toLocaleString()}
+          </div>
+          <div style={{ marginTop: 16, fontSize: '1.1rem', opacity: 0.6 }}>
+            {T.statTotal}
           </div>
         </div>
       )}
