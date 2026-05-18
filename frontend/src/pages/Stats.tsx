@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { TrendingUp, Users, Calendar, RefreshCw } from 'lucide-react'
+import { Users, RefreshCw } from 'lucide-react'
 import { getVisitStats, type VisitStats } from '../api'
 import { useLang } from '../LangContext'
 
@@ -23,8 +23,6 @@ export default function Stats({ apiMode }: { apiMode: ApiMode }) {
   useEffect(() => {
     if (apiMode === 'connected') fetchStats()
   }, [apiMode])
-
-  const maxCount = stats ? Math.max(...stats.daily.map((d) => d.count), 1) : 1
 
   return (
     <div className="guide-shell">
@@ -60,44 +58,17 @@ export default function Stats({ apiMode }: { apiMode: ApiMode }) {
       {!stats && !error && apiMode !== 'mock' && (
         <div className="skeleton-block" style={{ maxWidth: 560, margin: '0 auto' }}>
           <span className="skeleton-line title" />
-          <span className="skeleton-line wide" />
-          <span className="skeleton-line input" style={{ marginTop: 24 }} />
         </div>
       )}
 
       {stats && (
-        <>
-          <div className="stats-cards">
-            <div className="stats-card">
-              <TrendingUp size={28} />
-              <span className="stats-number">{stats.total.toLocaleString()}</span>
-              <span className="stats-label">{T.statTotal}</span>
-            </div>
-            <div className="stats-card accent">
-              <Calendar size={28} />
-              <span className="stats-number">{stats.today.toLocaleString()}</span>
-              <span className="stats-label">{T.statToday}</span>
-            </div>
+        <div className="stats-cards">
+          <div className="stats-card accent">
+            <Users size={28} />
+            <span className="stats-number">{stats.total.toLocaleString()}</span>
+            <span className="stats-label">{T.statTotal}</span>
           </div>
-
-          <section className="guide-section" style={{ marginTop: 40 }}>
-            <h2>{T.statChart}</h2>
-            <div className="visit-chart">
-              {stats.daily.map((d) => (
-                <div key={d.date} className="visit-bar-col">
-                  <span className="visit-bar-count">{d.count}</span>
-                  <div className="visit-bar-track">
-                    <div
-                      className="visit-bar-fill"
-                      style={{ height: `${Math.round((d.count / maxCount) * 100)}%` }}
-                    />
-                  </div>
-                  <span className="visit-bar-label">{d.date}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
+        </div>
       )}
     </div>
   )
