@@ -86,6 +86,7 @@ export const t = {
     statChart: '7 วันย้อนหลัง',
     statsLoading: 'กำลังโหลดสถิติ…',
     statsError: 'ไม่สามารถโหลดสถิติได้',
+    retry: 'ลองใหม่',
   },
 
   en: {
@@ -173,5 +174,6 @@ export const t = {
     statChart: 'Last 7 days',
     statsLoading: 'Loading stats…',
     statsError: 'Could not load stats',
+    retry: 'Retry',
   },
 } as const

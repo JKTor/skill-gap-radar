@@ -1,18 +1,28 @@
 import { useEffect, useState } from 'react'
-import { BarChart3, TrendingUp, Users, Calendar } from 'lucide-react'
+import { BarChart3, TrendingUp, Users, Calendar, RefreshCw } from 'lucide-react'
 import { getVisitStats, type VisitStats } from '../api'
 import { useLang } from '../LangContext'
 
-export default function Stats() {
+type ApiMode = 'checking' | 'connected' | 'mock'
+
+export default function Stats({ apiMode }: { apiMode: ApiMode }) {
   const { T } = useLang()
   const [stats, setStats] = useState<VisitStats | null>(null)
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
+  function fetchStats() {
+    setError(false)
+    setLoading(true)
     getVisitStats()
       .then(setStats)
       .catch(() => setError(true))
-  }, [])
+      .finally(() => setLoading(false))
+  }
+
+  useEffect(() => {
+    if (apiMode === 'connected') fetchStats()
+  }, [apiMode])
 
   const maxCount = stats ? Math.max(...stats.daily.map((d) => d.count), 1) : 1
 
@@ -26,13 +36,28 @@ export default function Stats() {
         <p className="guide-subtitle">{T.statsSubtitle}</p>
       </header>
 
-      {error && (
+      {apiMode === 'mock' && (
         <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '32px 0' }}>
-          {T.statsError}
+          {T.backendOffline}
         </p>
       )}
 
-      {!stats && !error && (
+      {error && apiMode !== 'mock' && (
+        <div style={{ textAlign: 'center', padding: '32px 0' }}>
+          <p style={{ color: 'var(--text-muted)', marginBottom: 16 }}>{T.statsError}</p>
+          <button
+            className="nav-tab"
+            onClick={fetchStats}
+            disabled={loading}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+          >
+            <RefreshCw size={14} />
+            {loading ? '…' : T.retry}
+          </button>
+        </div>
+      )}
+
+      {!stats && !error && apiMode !== 'mock' && (
         <div className="skeleton-block" style={{ maxWidth: 560, margin: '0 auto' }}>
           <span className="skeleton-line title" />
           <span className="skeleton-line wide" />

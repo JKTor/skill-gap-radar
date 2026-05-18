@@ -176,7 +176,7 @@ function App() {
 
       {/* ── Pages ─────────────────────────────────────────────────────── */}
       {page === 'guide' && <HowToUse onStart={() => setPage('radar')} />}
-      {page === 'stats' && <Stats />}
+      {page === 'stats' && <Stats apiMode={apiMode} />}
       {page === 'radar' && (
         <main className="app-shell">
           {/* ── Sidebar ───────────────────────────────────────────────── */}
