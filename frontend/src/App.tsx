@@ -70,7 +70,10 @@ function App() {
           setSelectedRole(titles[0].title)
           setQuery(titles[0].title)
         }
-        recordVisit('home').catch(() => {})
+        if (!sessionStorage.getItem('visited')) {
+          recordVisit('home').catch(() => {})
+          sessionStorage.setItem('visited', '1')
+        }
       })
       .catch(() => { if (alive) setApiMode('mock') })
     return () => { alive = false }
