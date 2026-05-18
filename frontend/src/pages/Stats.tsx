@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { BarChart3, TrendingUp, Users, Calendar, RefreshCw } from 'lucide-react'
+import { BarChart3, TrendingUp, Users, Calendar, RefreshCw, Rocket } from 'lucide-react'
+
+const LAUNCH_DATE = new Date('2026-05-18')
+function daysSinceLaunch() {
+  const diff = Date.now() - LAUNCH_DATE.getTime()
+  return Math.floor(diff / 86_400_000) + 1
+}
 import { getVisitStats, type VisitStats } from '../api'
 import { useLang } from '../LangContext'
 
@@ -80,9 +86,9 @@ export default function Stats({ apiMode }: { apiMode: ApiMode }) {
               <span className="stats-label">{T.statToday}</span>
             </div>
             <div className="stats-card">
-              <BarChart3 size={28} />
-              <span className="stats-number">{stats.this_week.toLocaleString()}</span>
-              <span className="stats-label">{T.statWeek}</span>
+              <Rocket size={28} />
+              <span className="stats-number">{daysSinceLaunch()}</span>
+              <span className="stats-label">{T.statDaysSinceLaunch}</span>
             </div>
           </div>
 
