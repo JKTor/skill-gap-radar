@@ -70,9 +70,10 @@ function App() {
           setSelectedRole(titles[0].title)
           setQuery(titles[0].title)
         }
-        if (!sessionStorage.getItem('visited')) {
+        const today = new Date().toISOString().slice(0, 10)
+        if (localStorage.getItem('visited') !== today) {
           recordVisit('home').catch(() => {})
-          sessionStorage.setItem('visited', '1')
+          localStorage.setItem('visited', today)
         }
       })
       .catch(() => { if (alive) setApiMode('mock') })
