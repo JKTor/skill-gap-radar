@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react'
-import { TrendingUp, Users, Calendar, RefreshCw, Rocket } from 'lucide-react'
-
-const LAUNCH_DATE = new Date('2026-05-18')
-function daysSinceLaunch() {
-  const diff = Date.now() - LAUNCH_DATE.getTime()
-  return Math.floor(diff / 86_400_000) + 1
-}
+import { TrendingUp, Users, Calendar, RefreshCw } from 'lucide-react'
 import { getVisitStats, type VisitStats } from '../api'
 import { useLang } from '../LangContext'
 
@@ -73,7 +67,6 @@ export default function Stats({ apiMode }: { apiMode: ApiMode }) {
 
       {stats && (
         <>
-          {/* ── 3 big numbers ─────────────────────────────────────── */}
           <div className="stats-cards">
             <div className="stats-card">
               <TrendingUp size={28} />
@@ -85,14 +78,8 @@ export default function Stats({ apiMode }: { apiMode: ApiMode }) {
               <span className="stats-number">{stats.today.toLocaleString()}</span>
               <span className="stats-label">{T.statToday}</span>
             </div>
-            <div className="stats-card">
-              <Rocket size={28} />
-              <span className="stats-number">{daysSinceLaunch()}</span>
-              <span className="stats-label">{T.statDaysSinceLaunch}</span>
-            </div>
           </div>
 
-          {/* ── Bar chart 7 days ──────────────────────────────────── */}
           <section className="guide-section" style={{ marginTop: 40 }}>
             <h2>{T.statChart}</h2>
             <div className="visit-chart">
