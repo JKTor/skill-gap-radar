@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BarChart3, TrendingUp, Users, Calendar, RefreshCw, Rocket } from 'lucide-react'
+import { TrendingUp, Users, Calendar, RefreshCw, Rocket } from 'lucide-react'
 
 const LAUNCH_DATE = new Date('2026-05-18')
 function daysSinceLaunch() {
