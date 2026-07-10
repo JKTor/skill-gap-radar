@@ -10,5 +10,5 @@ class Visit(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     page: Mapped[str] = mapped_column(String(50), default="home")
     visited_at: Mapped[datetime] = mapped_column(
-        DateTime, default=lambda: datetime.now(timezone.utc), index=True
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True
     )

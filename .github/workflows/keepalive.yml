@@ -1,0 +1,17 @@
+name: Keep backend awake
+
+on:
+  schedule:
+    # ทุก 10 นาที — กัน Render free tier spin down (cold start ~60 วิ)
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /health
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://skill-gap-radar-iyf0.onrender.com/health)
+          echo "health returned $code"
+          test "$code" = "200"
